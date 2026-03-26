@@ -45,6 +45,8 @@
   justify-content: center;
   transition: all var(--transition);
   min-height: 100px;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .clientCard:hover {
@@ -55,6 +57,7 @@
 
 .clientLogo {
   max-height: 40px;
+  width: 100%;
   max-width: 140px;
   object-fit: contain;
   filter: brightness(0) invert(1);
@@ -102,5 +105,16 @@
   }
   .grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .clientCard {
+    padding: 20px 12px;
+    min-height: 80px;
+  }
+  .clientLogo {
+    max-height: 32px;
+  }
+  .clientName {
+    font-size: 0.72rem;
   }
 }
