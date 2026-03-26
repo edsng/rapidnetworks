@@ -7,7 +7,7 @@ export default function Footer() {
         <div className={styles.top}>
           <div className={styles.brand}>
             <div className={styles.logo}>
-              <img src="/icon.svg" alt="Rapid Networks" className={styles.logoIcon} />
+              <img src={`${import.meta.env.BASE_URL}icon.svg`} alt="Rapid Networks" className={styles.logoIcon} />
               <div>
                 <span className={styles.logoText}>RAPID</span>
                 <span className={styles.logoSub}>NETWORKS</span>

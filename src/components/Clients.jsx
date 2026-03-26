@@ -2,15 +2,17 @@ import { motion } from 'framer-motion'
 import { useInView } from './useInView'
 import styles from './Clients.module.css'
 
+const base = import.meta.env.BASE_URL
+
 const clients = [
-  { name: 'Korea Aerospace Industries', logo: '/kai.png' },
-  { name: 'Hanwha Land Systems', logo: '/hanwha.png' },
-  { name: 'Hyundai J-Com', logo: '/hyundai.png' },
-  { name: 'Doosan Mottrol', logo: '/mottrol.png' },
-  { name: 'Firstec Co, LTD', logo: '/firsttec.png' },
-  { name: 'Hana Systems', logo: '/hanasystems.png' },
-  { name: 'Samyung ENC', logo: '/samyung.png' },
-  { name: 'Youngpoong Electronics', logo: '/ypelectronics.png' },
+  { name: 'Korea Aerospace Industries', logo: `${base}kai.png` },
+  { name: 'Hanwha Land Systems', logo: `${base}hanwha.png` },
+  { name: 'Hyundai J-Com', logo: `${base}hyundai.png` },
+  { name: 'Doosan Mottrol', logo: `${base}mottrol.png` },
+  { name: 'Firstec Co, LTD', logo: `${base}firsttec.png` },
+  { name: 'Hana Systems', logo: `${base}hanasystems.png` },
+  { name: 'Samyung ENC', logo: `${base}samyung.png` },
+  { name: 'Youngpoong Electronics', logo: `${base}ypelectronics.png` },
 ]
 
 export default function Clients() {

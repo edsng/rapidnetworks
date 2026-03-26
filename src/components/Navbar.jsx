@@ -53,7 +53,7 @@ export default function Navbar() {
     <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.inner}>
         <a href="#hero" className={styles.logo}>
-          <img src="/icon.svg" alt="Rapid Networks" className={styles.logoIcon} />
+          <img src={`${import.meta.env.BASE_URL}icon.svg`} alt="Rapid Networks" className={styles.logoIcon} />
           <div>
             <span className={styles.logoText}>RAPID</span>
             <span className={styles.logoSub}>NETWORKS</span>
