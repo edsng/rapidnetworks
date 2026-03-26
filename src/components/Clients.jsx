@@ -18,6 +18,8 @@ const clients = [
 export default function Clients() {
   const [ref, inView] = useInView()
 
+  const logos = [...clients, ...clients, ...clients]
+
   return (
     <section id="clients" className={styles.section} ref={ref}>
       <div className={styles.container}>
@@ -37,39 +39,37 @@ export default function Clients() {
         >
           Industry Leaders That<br />Rely On Our Service
         </motion.h2>
-
-        <div className={styles.grid}>
-          {clients.map((client, i) => (
-            <motion.div
-              key={client.name}
-              className={styles.clientCard}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.4, delay: 0.2 + i * 0.05 }}
-            >
-              {client.logo ? (
-                <img
-                  src={client.logo}
-                  alt={client.name}
-                  className={styles.clientLogo}
-                  title={client.name}
-                />
-              ) : (
-                <span className={styles.clientName}>{client.name}</span>
-              )}
-            </motion.div>
-          ))}
-        </div>
-
         <motion.p
-          className={styles.note}
+          className={styles.subtitle}
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.7 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
           Serving South Korea's premier defense and aerospace organizations
         </motion.p>
       </div>
+
+      <motion.div
+        className={styles.carouselWrap}
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.8, delay: 0.3 }}
+      >
+        <div className={styles.fadeLeft} />
+        <div className={styles.fadeRight} />
+        <div className={styles.track}>
+          {logos.map((client, i) => (
+            <div key={`${client.name}-${i}`} className={styles.logoItem}>
+              <img
+                src={client.logo}
+                alt={client.name}
+                className={styles.clientLogo}
+                title={client.name}
+              />
+            </div>
+          ))}
+        </div>
+      </motion.div>
     </section>
   )
 }

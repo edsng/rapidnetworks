@@ -1,12 +1,14 @@
 .section {
-  padding: 120px 40px;
+  padding: 120px 0;
   position: relative;
+  overflow: hidden;
 }
 
 .container {
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 0 auto 64px;
   text-align: center;
+  padding: 0 40px;
 }
 
 .label {
@@ -25,67 +27,11 @@
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -1px;
-  margin-bottom: 56px;
+  margin-bottom: 20px;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 40px;
-}
-
-.clientCard {
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: 28px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all var(--transition);
-  min-height: 100px;
-  min-width: 0;
-  overflow: hidden;
-}
-
-.clientCard:hover {
-  border-color: var(--color-accent);
-  background: var(--color-accent-glow);
-  transform: translateY(-2px);
-}
-
-.clientLogo {
-  max-height: 40px;
-  width: 100%;
-  max-width: 140px;
-  object-fit: contain;
-  filter: brightness(0) invert(1);
-  opacity: 0.5;
-  transition: all var(--transition);
-}
-
-.clientCard:hover .clientLogo {
-  filter: brightness(0) invert(1);
-  opacity: 1;
-}
-
-.clientName {
-  font-family: var(--font-heading);
-  font-size: 0.82rem;
-  font-weight: 600;
-  text-align: center;
-  line-height: 1.4;
-  color: var(--color-text-secondary);
-  transition: color var(--transition);
-}
-
-.clientCard:hover .clientName {
-  color: var(--color-text);
-}
-
-.note {
-  font-size: 0.88rem;
+.subtitle {
+  font-size: 0.92rem;
   color: var(--color-text-muted);
   font-family: var(--font-mono);
   font-size: 0.72rem;
@@ -93,28 +39,109 @@
   text-transform: uppercase;
 }
 
+/* ── Carousel ── */
+
+.carouselWrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.fadeLeft,
+.fadeRight {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.fadeLeft {
+  left: 0;
+  background: linear-gradient(to right, var(--color-bg), transparent);
+}
+
+.fadeRight {
+  right: 0;
+  background: linear-gradient(to left, var(--color-bg), transparent);
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: 72px;
+  width: max-content;
+  animation: scroll 35s linear infinite;
+}
+
+.track:hover {
+  animation-play-state: paused;
+}
+
+.logoItem {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 8px;
+}
+
+.clientLogo {
+  height: 36px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.clientLogo:hover {
+  opacity: 0.9;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% / 3));
+  }
+}
+
+/* ── Responsive ── */
+
 @media (max-width: 900px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
+  .track {
+    gap: 48px;
+  }
+  .fadeLeft, .fadeRight {
+    width: 60px;
   }
 }
 
 @media (max-width: 600px) {
   .section {
-    padding: 80px 20px;
+    padding: 80px 0;
   }
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+  .container {
+    padding: 0 20px;
+    margin-bottom: 48px;
   }
-  .clientCard {
-    padding: 20px 12px;
-    min-height: 80px;
+  .track {
+    gap: 36px;
+    animation-duration: 25s;
   }
   .clientLogo {
-    max-height: 32px;
+    height: 28px;
+    max-width: 120px;
   }
-  .clientName {
-    font-size: 0.72rem;
+  .logoItem {
+    height: 36px;
+  }
+  .fadeLeft, .fadeRight {
+    width: 40px;
   }
 }
