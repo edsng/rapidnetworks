@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Package, Wrench, Search, Rocket } from 'lucide-react'
 import { useInView } from './useInView'
@@ -32,9 +33,45 @@ const services = [
 
 export default function IndustrialParts() {
   const [ref, inView] = useInView()
+  const sectionRef = useRef(null)
+  const [activeIndex, setActiveIndex] = useState(-1)
+  const [progress, setProgress] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const section = sectionRef.current
+      if (!section) return
+
+      const rect = section.getBoundingClientRect()
+      const sectionHeight = rect.height
+      const viewportHeight = window.innerHeight
+
+      // rect.top = distance from viewport top to section top
+      // Start: section top reaches 60% down the viewport (already partially visible)
+      // End: section bottom reaches 80% of viewport (still mostly visible)
+      const scrollStart = viewportHeight * 0.001
+      const scrollEnd = viewportHeight * 0.8
+      const currentPos = rect.top
+      const scrolled = (scrollStart - currentPos) / (scrollStart + sectionHeight - scrollEnd)
+      const clamped = Math.max(0, Math.min(1, scrolled))
+      setProgress(clamped)
+
+      // Map progress to active card index — tighter mapping
+      const adjusted = (clamped - 0.05) / 0.8
+      const idx = Math.floor(adjusted * services.length)
+      setActiveIndex(Math.max(-1, Math.min(services.length - 1, idx)))
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <section id="industrial" className={styles.section} ref={ref}>
+    <section id="industrial" className={styles.section} ref={(el) => {
+      ref.current = el
+      sectionRef.current = el
+    }}>
       <div className={styles.container}>
         <div className={styles.left}>
           <motion.span
@@ -71,13 +108,41 @@ export default function IndustrialParts() {
           >
             Request a Consultation
           </motion.a>
+
+          {/* Progress tracker — desktop only */}
+          <motion.div
+            className={styles.tracker}
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            <div className={styles.trackLine}>
+              <div
+                className={styles.trackFill}
+                style={{ height: `${Math.max(0, Math.min(100, progress * 120 - 10))}%` }}
+              />
+            </div>
+            <div className={styles.steps}>
+              {services.map((s, i) => (
+                <div
+                  key={s.tag}
+                  className={`${styles.step} ${i <= activeIndex ? styles.stepActive : ''}`}
+                >
+                  <div className={styles.stepDot}>
+                    <s.icon size={12} />
+                  </div>
+                  <span className={styles.stepLabel}>{s.tag}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
 
         <div className={styles.right}>
           {services.map((s, i) => (
             <motion.div
               key={s.title}
-              className={styles.card}
+              className={`${styles.card} ${i <= activeIndex ? styles.cardActive : ''}`}
               initial={{ opacity: 0, x: 40 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 + i * 0.12 }}
