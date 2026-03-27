@@ -6,6 +6,7 @@ const regulations = [
   {
     name: 'ITAR',
     ref: '22 CFR 120-130',
+    refUrl: 'https://www.ecfr.gov/current/title-22/chapter-I/subchapter-M/part-120?toc=1',
     color: '#3b82f6',
     points: [
       'Regulates military items and defense articles based on the USML',
@@ -18,6 +19,7 @@ const regulations = [
   {
     name: 'EAR',
     ref: '15 CFR 730-774',
+    refUrl: 'https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C/part-730',
     color: '#10b981',
     points: [
       'Covers commercial items with potential military application (CCL)',
@@ -76,7 +78,7 @@ export default function Compliance() {
                 <div className={styles.cardBadge} style={{ background: reg.color }}>
                   {reg.name}
                 </div>
-                <span className={styles.cardRef}>{reg.ref}</span>
+                <a href={reg.refUrl} target="_blank" rel="noopener noreferrer" className={styles.cardRef}>{reg.ref}</a>
               </div>
               <ul className={styles.list}>
                 {reg.points.map((pt, j) => (

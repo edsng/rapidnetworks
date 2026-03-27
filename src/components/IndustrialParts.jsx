@@ -50,7 +50,7 @@ export default function IndustrialParts() {
       // Start: section top reaches 60% down the viewport (already partially visible)
       // End: section bottom reaches 80% of viewport (still mostly visible)
       const scrollStart = viewportHeight * 0.001
-      const scrollEnd = viewportHeight * 0.8
+      const scrollEnd = viewportHeight * 0.9
       const currentPos = rect.top
       const scrolled = (scrollStart - currentPos) / (scrollStart + sectionHeight - scrollEnd)
       const clamped = Math.max(0, Math.min(1, scrolled))

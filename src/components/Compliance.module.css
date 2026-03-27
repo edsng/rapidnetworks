@@ -92,6 +92,12 @@
   font-size: 0.72rem;
   color: var(--color-text-muted);
   letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.cardRef:hover {
+  color: var(--color-accent-bright);
 }
 
 .list {
