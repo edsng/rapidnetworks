@@ -36,7 +36,7 @@ export default function Footer() {
             <h4 className={styles.groupTitle}>Compliance</h4>
             <a href="https://www.pmddtc.state.gov/ddtc_public?id=ddtc_kb_article_page&sys_id=24d528fddbfc930044f9ff621f961987" target="_blank" rel="noopener noreferrer" className={styles.footLink}>ITAR (22 CFR 120-130)</a>
             <a href="https://www.bis.gov/regulations/ear" target="_blank" rel="noopener noreferrer" className={styles.footLink}>EAR (15 CFR 730-774)</a>
-            <span className={styles.footLink}>DDTC Registered</span>
+            <a href="https://www.pmddtc.state.gov/ddtc_public" target="_blank" rel="noopener noreferrer" className={styles.footLink}>DDTC</a>
           </div>
         </div>
 
